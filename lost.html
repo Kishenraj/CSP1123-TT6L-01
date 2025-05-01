@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report Lost Item</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Report Lost Item</h1>
+    <form class="form" enctype="multipart/form-data" form action="insert.php" method="post">
+      <label for="lost-name">Your Name</label>
+      <input type="text" id="lost-name" name="username" required><br>
+
+      <label for="lost-desc">Description</label>
+      <textarea id="lost-desc" name="itemdescription" required></textarea><br>
+
+      <label for="lost-img">Upload Image</label>
+      <input type="file" id="lost-img" name="userimage" accept="image/*"><br>
+
+      <button type="submit" class="btn">Submit</button>
+    </form>
+    <a href="index.html" class="btn" style="margin-top: 20px;">Back to Home</a>
+  </div>
+</body>
+</html>
