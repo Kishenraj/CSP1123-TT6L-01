@@ -1,0 +1,89 @@
+/* style-index.css */
+
+/* Full page background */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('1280_720_2.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  height: 100vh;
+}
+
+/* Navigation bar top-right */
+.nav {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  display: flex;
+  gap: 20px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Adjust main content position a bit higher */
+.main-content {
+  position: absolute;
+  top: 40%; /* moved up from 50% to 40% */
+  left: 50%;
+  transform: translate(-50%, -40%);
+  text-align: center;
+  width: 90%;
+  max-width: 900px;
+}
+
+/* Add more spacing between Lost/Found buttons and Survey */
+.btn-survey-container {
+  margin-top: 50px; /* increased spacing from 20px to 50px */
+}
+
+
+/* Headings */
+.main-content h1 {
+  font-size: 56px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px black;
+}
+
+.main-content p {
+  font-size: 28px;
+  margin-bottom: 40px;
+  text-shadow: 1px 1px 3px black;
+}
+
+/* Buttons container */
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+/* Buttons style */
+.main-btn {
+  font-size: 24px;
+  padding: 20px 40px;
+  background-color: rgba(0, 0, 128, 0.7);
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.main-btn:hover {
+  background-color: rgba(0, 0, 180, 0.9);
+  transform: scale(1.05);
+}
