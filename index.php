@@ -1,77 +1,150 @@
+<?php
+session_start();
+include 'connect.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$is_admin = $_SESSION['is_admin'] ?? 0;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register & Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lost & Found - Home</title>
+  <link rel="stylesheet" href="style-index.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    .main-content {
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .main-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      margin: 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .main-btn:hover {
+      background-color: #45a049;
+    }
+
+    .btn-survey {
+      background-color: #673ab7;
+    }
+
+    .btn-survey:hover {
+      background-color: #5e35b1;
+    }
+
+    /* Profile Icon Top Left */
+    .profile-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .profile-button small {
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .profile-button:hover {
+      background-color: #45a049;
+    }
+
+    /* Navigation Bar Top Right */
+    .nav {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+      background-color: #333;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin-left: 10px;
+      display: inline-block;
+    }
+
+    .nav-link:hover {
+      background-color: #555;
+    }
+
+    .chat-button {
+      background-color: #25D366 !important;
+    }
+
+    .chat-button:hover {
+      background-color: #128c3e !important;
+    }
+  </style>
 </head>
 <body>
-    <div class="container" id="signup" style="display:none;">
-      <h1 class="form-title">Register</h1>
-      <form method="post" action="register.php">
-        <div class="input-group">
-           <i class="fas fa-user"></i>
-           <input type="text" name="fName" id="fName" placeholder="First Name" required>
-           <label for="fname">First Name</label>
-        </div>
-        <div class="input-group">
-            <i class="fas fa-user"></i>
-            <input type="text" name="lName" id="lName" placeholder="Last Name" required>
-            <label for="lName">Last Name</label>
-        </div>
-        <div class="input-group">
-            <i class="fas fa-envelope"></i>
-            <input type="email" name="email" id="email" placeholder="Email" required>
-            <label for="email">Email</label>
-        </div>
-        <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" name="password" id="password" placeholder="Password" required>
-            <label for="password">Password</label>
-        </div>
-       <input type="submit" class="btn" value="Sign Up" name="signUp">
-      </form>
-      <p class="or">
-        ----------or--------
-      </p>
-      <div class="icons">
-      </div>
-      <div class="links">
-        <p>Already Have Account ?</p>
-        <button id="signInButton">Sign In</button>
-      </div>
-    </div>
 
-    <div class="container" id="signIn">
-        <h1 class="form-title">Sign In</h1>
-        <form method="post" action="register.php">
-          <div class="input-group">
-              <i class="fas fa-envelope"></i>
-              <input type="email" name="email" id="email" placeholder="Email" required>
-              <label for="email">Email</label>
-          </div>    
-          <div class="input-group">
-              <i class="fas fa-lock"></i>
-              <input type="password" name="password" id="password" placeholder="Password" required>
-              <label for="password">Password</label>
-          </div>
-          <p class="recover">
-            <a href="#">Recover Password</a>
-          </p>
-         <input type="submit" class="btn" value="Sign In" name="signIn">
-        </form>
-        <p class="or">
-          ----------or--------
-        </p>
-        <div class="icons">
-        </div>
-        <div class="links">
-          <p>Don't have account yet?</p>
-          <button id="signUpButton">Sign Up</button>
-        </div>
-      </div>
-      <script src="script.js"></script>
+  <!-- Profile Icon Top Left -->
+  <a href="profile.php" class="profile-button" title="Profile">
+    <span>&#128100;</span>
+    <small>Profile</small>
+  </a>
+
+  <!-- Navigation Bar Top Right -->
+  <div class="nav">
+    <a href="logout.php" class="nav-link">Logout</a>
+    <a href="chat_list.php" class="nav-link chat-button" title="Chat">&#128172; Chat</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>Welcome to the Lost & Found Portal</h1>
+    <p>Select a category to continue:</p>
+    <div class="btn-row">
+      <a href="lost.php" class="main-btn">Report Lost Item</a>
+      <a href="found.php" class="main-btn">Report Found Item</a>
+      
+    </div>
+   <div class="btn-survey-container">
+    <a href="survey.php" class="main-btn btn-survey">Survey</a>
+</div>
+
+  </div>
+
 </body>
 </html>
